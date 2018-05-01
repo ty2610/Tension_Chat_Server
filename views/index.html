@@ -2,7 +2,7 @@
 <html lang="en" ng-app="indexApp">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -15,7 +15,21 @@
 </head>
 <body>
     <div ng-controller="IndexController">
-        AYYYYYE
+        <div class="container-fluid">
+            <div class="row justify-content-center" style="margin-top: 20px;">
+                <div class="col-sm">
+                    <label for="username">Username:</label>
+                    <input class="form-control" type="text" name="username" id="username">
+                </div>
+                <div class="col-sm">
+                    <label for="colorSelect">User Color:</label>
+                    <input type="color" class="form-control" id="colorSelect">
+                </div>
+                <div class="col-sm ">
+                    <input class="btn btn-primary" type="submit" value="Log-In" ng-click="submitSearch()" style="margin-top: 30px;">
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
