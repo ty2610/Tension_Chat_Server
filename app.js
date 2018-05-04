@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var pageIndexRouter = require('./routes/index');
 var pageMainRouter = require('./routes/login');
+var chatRoomRouter = require('./routes/chat');
 
 var app = express();
 
@@ -21,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', pageIndexRouter);
 app.use('/login', pageMainRouter);
+app.use('/chat',chatRoomRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,5 +41,6 @@ app.use(function(err, req, res, next) {
     //NEED TO ADD ERROR.HTML PAGE TO SHOW
     //res.render('error');
 });
+
 
 module.exports = app;
