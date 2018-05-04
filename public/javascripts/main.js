@@ -11,5 +11,9 @@ mainApp.controller('MainController', function IndexController($scope, $location)
     $scope.initialize = () => {
         var paramUsername = $location.search().username;
         var paramUserColor = $location.search().userColor;
+    };
+
+    $scope.logout = () => {
+        window.location.href = "/";
     }
 });

@@ -1,0 +1,30 @@
+.stuffHolder{
+    display: inline-block;
+    vertical-align: top;
+    width: 85%;
+}
+.timeStamp{
+    display: inline-block;
+    text-decoration-color: gray;
+    font-size: .8em;
+}
+.userName{
+    display: inline-block;
+    vertical-align: top;
+    font-weight: bold;
+}
+.message{
+    display: block;
+    vertical-align: bottom;
+    word-wrap:break-word;
+    overflow: auto;
+    width: 100%;
+}
+.picture{
+    background-color: blue;
+    min-height: 50px;
+    min-width: 50px;
+    display: inline-block;
+    margin-right: 1%;
+    margin-top: 5px;
+}
