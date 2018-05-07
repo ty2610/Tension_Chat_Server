@@ -14,7 +14,11 @@ mainApp.controller('MainController', function IndexController($scope, $location)
 
     $scope.logout = () => {
         window.location.href = "/";
-    }
+    };
+
+    $scope.openChatRoom = (number) => {
+        window.location.href = "/chat?username=" + $location.search().username + "&chatNumber=" + number;
+    };
 
     //TODO: Have buttons that represent each chat room, as well as a button to create a new chatroom (add to DB).
     //Todo: url = /chat?chatroomID=____&username=paramUsername

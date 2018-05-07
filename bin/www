@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('tension-chat-server:server');
 var http = require('http');
+var socketio = require('socket.io');
 
 /**
  * Get port from environment and store in Express.
@@ -28,6 +29,35 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+var io = socketio(server);
+
+/*io.sockets.on('connection', function (socket) {
+    io.sockets.emit('this', { will: 'be received by everyone' });
+
+    socket.on('private message', function (msg) {
+        console.log('I received a private message from ', socket.id, ' saying ', msg);
+        // Echo private message only to the client who sent it
+        socket.emit('private message', msg);
+    });
+
+    socket.on('disconnect', function () {
+        // This will be received by all connected clients
+        io.sockets.emit('user disconnected');
+    });
+});
+
+all_active_connections = {};*/
+
+io.sockets.on('connection', (client) => {
+    console.log("CLIENT CONNECTED");
+
+    client.emit('msg', {from:"server", text: "hello"});
+
+    client.on('private message', function (msg) {
+        console.log('I received a private message from ', client.id, ' saying ', msg);
+    });
+});
 
 /**
  * Normalize a port into a number, string, or false.

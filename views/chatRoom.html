@@ -11,9 +11,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="application/javascript" src="/socket.io/socket.io.js"></script>
     <script src="javascripts/chatRoom.js"></script>
 </head>
-<body ng-controller="chatController">
+<body ng-controller="chatController" ng-init="initialize()">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href>Tension</a>
@@ -30,34 +31,36 @@
     </nav>
 
     <div class="container">
+        <h1 class="roomTitle text-center">CHAT ROOM</h1>
 
-        <div class="jumbotron"><h1 style="text-align: center;">ChatRoom</h1></div>
+        <div id="chatHolder" class="d-flex flex-column chatContainer">
+            <!--<div class="p-2">
+                <div class="picture"></div>
+                <div class="stuffHolder">
+                    <div class="userName">Tyler Green</div>
+                    <div class="timeStamp">11:40</div>
+                    <div class="message">This app is way cooler than slack!kj;sdfngkerfjgakdvfasdfndffnasdklnmkldgvmldk;gnfdkvgnmlkfsdsgnm,klfdsngklsdfnglksdfnm,gsdfklngsdflkgknsdflgnksdfkm,nglkfdsgnm,klsdfnm,gsdflkgjmsdfkl;gnmlksdfgnsdfmklg</div>
+                </div>
+            </div>-->
 
-
-
-        <div class="d-flex flex-column">
-
-            <div class="p-2">
-
-                    <div class="picture"> </div>
-                    <div class="stuffHolder">
-                        <div class="userName">Tyler Green</div>
-                        <div class="timeStamp">11:40</div>
-
-                        <div class="message">This app is way cooler than slack!kj;sdfngkerfjgakdvfasdfndffnasdklnmkldgvmldk;gnfdkvgnmlkfsdsgnm,klfdsngklsdfnglksdfnm,gsdfklngsdflkgknsdflgnksdfkm,nglkfdsgnm,klsdfnm,gsdflkgjmsdfkl;gnmlksdfgnsdfmklg</div>
-
-                    </div>
-
+            <div class="p-2" ng-repeat="row in messageObject track by $index">
+                <div class="picture" ng-style="{background: row.color}"></div>
+                <div class="stuffHolder">
+                    <div class="userName">{{row.username}}</div>
+                    <div class="timeStamp">{{row.timestamp}}</div>
+                    <div class="message">{{row.message}}</div>
+                </div>
             </div>
-
-
-
-            <div class="d-flex p-2">Flex item 2</div>
-            <div class="d-flex p-2">Flex item 3</div>
+            <div class="p-2" ng-repeat="row in localMessageObject track by $index">
+                <div class="picture" ng-style="{background: row.color}"></div>
+                <div class="stuffHolder">
+                    <div class="userName">{{row.username}}</div>
+                    <div class="timeStamp">{{row.timestamp}}</div>
+                    <div class="message">{{row.message}}</div>
+                </div>
+            </div>
         </div>
-
-        <button type="button" class="btn btn-primary" ng-click="click()">ClickMe</button>
-
+        <input class="form-control messageInput" type="text" name="message" id="message" ng-keyup="$event.keyCode == 13 ? sendMessage() : null">
     </div>
 
 

@@ -8,6 +8,9 @@ var pageIndexRouter = require('./routes/index');
 var pageMainRouter = require('./routes/login');
 var chatRoomRouter = require('./routes/chat');
 var loginSwitchRouter = require('./routes/loginSwitch');
+var getMessageRouter = require('./routes/getMessage');
+var sendMessageRouter = require('./routes/sendMessage');
+var getUserColor = require('./routes/getUserColor');
 
 var app = express();
 
@@ -25,6 +28,9 @@ app.use('/', pageIndexRouter);
 app.use('/login', pageMainRouter);
 app.use('/chat', chatRoomRouter);
 app.use('/loginSwitch', loginSwitchRouter);
+app.use('/getMessages', getMessageRouter);
+app.use('/sendMessage', sendMessageRouter);
+app.use('/getUserColor', getUserColor);
 
 
 // catch 404 and forward to error handler
