@@ -40,6 +40,53 @@ mainApp.controller('MainController', function IndexController($scope, $location,
         window.location.href = "/chat?username=" + $location.search().username + "&chatNumber=" + number;
     };
 
-    //TODO: Have buttons that represent each chat room, as well as a button to create a new chatroom (add to DB).
+    $scope.removeRoom = (ID) =>{
+
+        //TODO: Send request to server to remove the room where the room ID matches.
+        var url = "/removeRoom?id="+ID;
+        $http({
+            method: "POST",
+            url: url
+        }).then(function successCallback(response) {
+            //console.log(response);
+            console.log('Success');
+            console.log(response.data);
+            console.log($scope.buttons[0].ID);
+
+            var newArray = [];
+            for(i=0; i < $scope.buttons.length; i++){
+                if($scope.buttons[i].ID !== parseInt(response.data)){
+                    newArray.push($scope.buttons[i]);
+                }
+            }
+            $scope.buttons = newArray;
+            $scope.$apply();
+
+        }, function errorCallback(response) {
+            console.log('Oops');
+            console.log(response);
+        });
+    };
+
+    $scope.createRoom = (room_name) => {
+
+        //TODO: Send request to server to add the room with the name: room_name
+        var url = "/createRoom?room_name="+room_name;
+        $http({
+            method: "POST",
+            url: url
+        }).then(function successCallback(response) {
+            //console.log(response);
+            console.log('Success');
+            console.log(response);
+            $window.location.replace($window.location.href);
+
+
+        }, function errorCallback(response) {
+            console.log('Oops');
+            console.log(response);
+        });
+
+    }
     //Todo: url = /chat?chatroomID=____&username=paramUsername
 });

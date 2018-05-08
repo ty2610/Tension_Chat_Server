@@ -14,6 +14,8 @@ var getUserColor = require('./routes/getUserColor');
 
 //Added the getChatRooms router
 var getChatRooms = require('./routes/getChatRooms');
+var removeRoom = require('./routes/removeRoom');
+var createRoom = require('./routes/createRoom');
 
 
 var app = express();
@@ -38,6 +40,11 @@ app.use('/getUserColor', getUserColor);
 
 //Added the getChatRooms router
 app.use('/getChatRooms',getChatRooms);
+
+//Added the create/remove room routes
+app.use('/removeRoom',removeRoom);
+app.use('/createRoom',createRoom);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

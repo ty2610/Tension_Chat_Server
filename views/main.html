@@ -30,14 +30,19 @@
             </div>
         </nav>
         <!-- TODO two static buttons. 1 audio, 1 video -->
-        <div style="margin-left: 10px; margin-top: 20px">
+        <div style="margin-left: 20px; margin-top: 20px">
 
-            <input class="btn btn-primary" type="submit" value="Video Chat" ng-click="openChatRoom(1)" style="margin-top: 30px; display: block">
+            <div>
+                <p style="display: inline; font-size: 1.5em">Create Chat Room: </p>
+                <input type="text" placeholder="Name" ng-model="chatRoomName" style="vertical-align: middle; margin-left: 5px">
+                <input class="btn btn-primary" type="submit" value="Create Room" ng-click="createRoom(chatRoomName)" style="vertical-align: middle; margin-left: 5px">
+            </div>
 
-            <input class="btn btn-primary" type="submit" value="Audio Chat" ng-click="openChatRoom(1)" style="margin-top: 30px; display: block">
+            <input class="btn btn-primary" type="submit" value="Video Chat" ng-click="openChatRoom(1)" style="margin-top: 10px; display: block">
+            <input class="btn btn-primary" type="submit" value="Audio Chat" ng-click="openChatRoom(1)" style="margin-top: 10px; display: block">
             <!--TODO: NG-Repeat through names of the chatrooms. (create buttons for each one) -->
             <div ng-repeat="x in buttons">
-                <input class="btn btn-primary" type="submit" value="{{x.name}}" ng-click="openChatRoom(x.ID)" style="margin-top: 30px; display: block;">
+                <input class="btn btn-primary" type="submit" value="{{x.name}}" ng-click="openChatRoom(x.ID)" style="margin-top: 10px; display: inline;"><input class="btn btn-primary" type="submit" value="X" ng-click="removeRoom(x.ID)" style="margin-top: 10px; display: inline; margin-left: 10px; background-color: red;">
             </div>
         </div>
     </div>
