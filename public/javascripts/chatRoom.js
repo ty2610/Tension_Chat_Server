@@ -26,12 +26,12 @@ chatApp.controller('chatController', function ($scope, $location) {
             }
         });
 
-        var socket = io();
+        $scope.socket = io();
 
-        socket.emit('private message', "AYYYYE");
-
-        socket.on('msg', (data) => {
-            console.log(data);
+        $scope.socket.on('Chat Message', (sendMessageObject) => {
+            if(sendMessageObject.chatRoomNumber === $scope.paramChatNumber && sendMessageObject.username !== $scope.paramUsername) {
+                $scope.localInsert(sendMessageObject);
+            }
         });
     };
 
@@ -56,8 +56,15 @@ chatApp.controller('chatController', function ($scope, $location) {
                         cache: false,
                         contentType: "application/x-www-form-urlencoded",
                         success: (data) => {
+                            var timeCreated = new Date();
+                            var dateString = timeCreated.getFullYear() + "-" + ("0"+(timeCreated.getMonth()+1)).slice(-2) + "-" +
+                                ("0" + timeCreated.getDate()).slice(-2) + " " + ("0" + timeCreated.getHours()).slice(-2) + ":" + ("0" + timeCreated.getMinutes()).slice(-2) +
+                                ":" + ("0" + timeCreated.getSeconds()).slice(-2);
                             var ret = JSON.parse(data);
-                            $scope.localInsert(ret[0].color, inputMessage, $scope.paramChatNumber, $scope.paramUsername);
+                            var sendMessageObject = {color: ret[0].color, username: $scope.paramUsername, message:inputMessage, timestamp:dateString, chatRoomNumber:$scope.paramChatNumber};
+                            $scope.socket.emit('Chat Message', sendMessageObject);
+                            //$scope.localInsert(ret[0].color, inputMessage, $scope.paramChatNumber, $scope.paramUsername);
+                            $scope.localInsert(sendMessageObject);
                         },
                         error: function (error) {
                             alert(error.responseText);
@@ -71,12 +78,8 @@ chatApp.controller('chatController', function ($scope, $location) {
         }
     };
 
-    $scope.localInsert = (color, message, chatRoomNumber, username) => {
-        var timeCreated = new Date();
-        var dateString = timeCreated.getFullYear() + "-" + ("0"+(timeCreated.getMonth()+1)).slice(-2) + "-" +
-            ("0" + timeCreated.getDate()).slice(-2) + " " + ("0" + timeCreated.getHours()).slice(-2) + ":" + ("0" + timeCreated.getMinutes()).slice(-2) +
-            ":" + ("0" + timeCreated.getSeconds()).slice(-2);
-        $scope.localMessageObject.push({color: color, username: username, message:message, timestamp:dateString});
+    $scope.localInsert = (sendMessageObject) => {
+        $scope.localMessageObject.push(sendMessageObject);
         $scope.$apply();
         $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
         $("#message").val("");

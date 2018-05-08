@@ -50,12 +50,8 @@ var io = socketio(server);
 all_active_connections = {};*/
 
 io.sockets.on('connection', (client) => {
-    console.log("CLIENT CONNECTED");
-
-    client.emit('msg', {from:"server", text: "hello"});
-
-    client.on('private message', function (msg) {
-        console.log('I received a private message from ', client.id, ' saying ', msg);
+    client.on('Chat Message', function (messageObject) {
+        io.sockets.emit('Chat Message', messageObject);
     });
 });
 
