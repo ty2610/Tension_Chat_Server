@@ -30,9 +30,16 @@
             </div>
         </nav>
         <!-- TODO two static buttons. 1 audio, 1 video -->
-        <!--TODO: NG-Repeat through names of the chatrooms. (create buttons for each one) -->
-        <input class="btn btn-primary" type="submit" value="tylers room" ng-click="openChatRoom(1)" style="margin-top: 30px;">
+        <div style="margin-left: 10px; margin-top: 20px">
 
+            <input class="btn btn-primary" type="submit" value="Video Chat" ng-click="openChatRoom(1)" style="margin-top: 30px; display: block">
+
+            <input class="btn btn-primary" type="submit" value="Audio Chat" ng-click="openChatRoom(1)" style="margin-top: 30px; display: block">
+            <!--TODO: NG-Repeat through names of the chatrooms. (create buttons for each one) -->
+            <div ng-repeat="x in buttons">
+                <input class="btn btn-primary" type="submit" value="{{x.name}}" ng-click="openChatRoom(x.ID)" style="margin-top: 30px; display: block;">
+            </div>
+        </div>
     </div>
 </body>
 </html>

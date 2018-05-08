@@ -12,6 +12,10 @@ var getMessageRouter = require('./routes/getMessage');
 var sendMessageRouter = require('./routes/sendMessage');
 var getUserColor = require('./routes/getUserColor');
 
+//Added the getChatRooms router
+var getChatRooms = require('./routes/getChatRooms');
+
+
 var app = express();
 
 // view engine setup
@@ -32,6 +36,8 @@ app.use('/getMessages', getMessageRouter);
 app.use('/sendMessage', sendMessageRouter);
 app.use('/getUserColor', getUserColor);
 
+//Added the getChatRooms router
+app.use('/getChatRooms',getChatRooms);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
