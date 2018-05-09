@@ -15,16 +15,31 @@ router.post('/', function(req, res, next) {
     var ID = req.param('id');
     console.log('id : ' + ID);
 
-    var query = "DELETE FROM rooms WHERE id='"+ID+"'";
+    db.serialize(function () {
+        var query = "DELETE FROM rooms WHERE id='"+ID+"'";
 
-    db.all(query, (err, result) =>{
-        if(err !== null){
-            res.status(500).send(err);
-        } else {
-            res.send(ID);
-        }
-        db.close();
+        db.all(query, (err, result) =>{
+            if(err !== null){
+                res.status(500).send(err);
+            } else {
+                //res.send(ID);
+                console.log("removed Room");
+            }
+            //db.close();
+        });
+        query = "DELETE FROM messages WHERE roomNumber='"+ID+"'";
+        db.all(query, (err, result) =>{
+            if(err !== null){
+                res.status(500).send(err);
+            } else {
+                console.log("removed Messages in room");
+                res.send(ID);
+            }
+            db.close();
+        });
     });
+
+
     //Testing to get the response.
 });
 
