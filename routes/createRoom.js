@@ -12,13 +12,28 @@ router.post('/', function(req, res, next) {
     var room_name = req.param('room_name');
     var query = "INSERT INTO rooms(name) VALUES('" + room_name + "')";
 
-    db.all(query, (err, result) =>{
-        if(err !== null){
-            res.status(500).send(err);
-        } else {
-            res.send("success");
-        }
-        db.close();
+    db.serialize(function () {
+        db.all(query, (err, result) =>{
+            if(err !== null){
+                res.status(500).send(err);
+            } else {
+                //res.send("success");
+                console.log("added room");
+            }
+            //db.close();
+        });
+
+        query = "SELECT * FROM rooms WHERE name = '"+room_name+"';";
+        db.all(query, (err, result) =>{
+            if(err !== null){
+                res.status(500).send(err);
+            } else {
+                console.log("RESULT: " + result[0].ID);
+                res.send(200,result[0].ID);
+            }
+            db.close();
+        });
+
     });
     //Testing to get the response.
 });

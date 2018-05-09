@@ -22,7 +22,6 @@ router.post('/', function(req, res, next) {
             if(err !== null){
                 res.status(500).send(err);
             } else {
-                //res.send(ID);
                 console.log("removed Room");
             }
             //db.close();

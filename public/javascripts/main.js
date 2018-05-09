@@ -51,7 +51,6 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             //console.log(response);
             console.log('Success');
             console.log(response.data);
-            console.log($scope.buttons[0].ID);
 
             var newArray = [];
             for(i=0; i < $scope.buttons.length; i++){
@@ -69,24 +68,36 @@ mainApp.controller('MainController', function IndexController($scope, $location,
     };
 
     $scope.createRoom = (room_name) => {
+        var err = false;
 
-        //TODO: Send request to server to add the room with the name: room_name
-        var url = "/createRoom?room_name="+room_name;
-        $http({
-            method: "POST",
-            url: url
-        }).then(function successCallback(response) {
-            //console.log(response);
-            console.log('Success');
-            console.log(response);
-            $window.location.replace($window.location.href);
+        for(i = 0; i < $scope.buttons.length; i++){
+            if($scope.buttons[i].name === room_name){
+                err = true;
+            }
+        }
 
+        if(err){
+            $window.alert("This Chat Room Already Exists");
+        }
+        else{
 
-        }, function errorCallback(response) {
-            console.log('Oops');
-            console.log(response);
-        });
+            var url = "/createRoom?room_name="+room_name;
+            $http({
+                method: "POST",
+                url: url
+            }).then(function successCallback(response) {
+                //console.log(response);
+                console.log('Success');
+                //TODO: Push room_name and the ID from response to the $scope.buttons array then $scope.$apply()
+                console.log(response);
+                var newButton = {ID:parseInt(response.data),name:room_name};
+                $scope.buttons.push(newButton);
+                $scope.$apply();
 
+            }, function errorCallback(response) {
+                console.log('Oops');
+                console.log(response);
+            });
+        }
     }
-    //Todo: url = /chat?chatroomID=____&username=paramUsername
 });
