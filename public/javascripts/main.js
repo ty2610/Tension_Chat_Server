@@ -70,6 +70,7 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             room_name = room_name.replace(')','');
             room_name = room_name.replace('[','');
             room_name = room_name.replace(']','');
+            room_name = room_name.replace(';','');
 
             var err = false;
             for(i = 0; i < $scope.buttons.length; i++){
