@@ -19,10 +19,6 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             method: "GET",
             url: url
         }).then(function successCallback(response) {
-            //console.log(response);
-            console.log('Success');
-            console.log(response);
-            console.log(response.data[0]);
             for(i=0; i < response.data.length; i++){
                 $scope.buttons.push(response.data[i]);
             }
@@ -31,7 +27,6 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             console.log(response);
         });
     };
-
     $scope.logout = () => {
         window.location.href = "/";
     };
@@ -42,15 +37,11 @@ mainApp.controller('MainController', function IndexController($scope, $location,
 
     $scope.removeRoom = (ID) =>{
 
-        //TODO: Send request to server to remove the room where the room ID matches.
         var url = "/removeRoom?id="+ID;
         $http({
             method: "POST",
             url: url
         }).then(function successCallback(response) {
-            //console.log(response);
-            console.log('Success');
-            console.log(response.data);
 
             var newArray = [];
             for(i=0; i < $scope.buttons.length; i++){
@@ -80,7 +71,6 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             room_name = room_name.replace('[','');
             room_name = room_name.replace(']','');
 
-
             var err = false;
             for(i = 0; i < $scope.buttons.length; i++){
                 if($scope.buttons[i].name === room_name){
@@ -97,10 +87,6 @@ mainApp.controller('MainController', function IndexController($scope, $location,
                     method: "POST",
                     url: url
                 }).then(function successCallback(response) {
-                    //console.log(response);
-                    console.log('Success');
-                    //TODO: Push room_name and the ID from response to the $scope.buttons array then $scope.$apply()
-                    console.log(response);
                     var newButton = {ID:parseInt(response.data),name:room_name};
                     $scope.buttons.push(newButton);
                     $scope.$apply();

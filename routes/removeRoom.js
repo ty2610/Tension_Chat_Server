@@ -5,13 +5,8 @@ var url = require('url');
 var http = require('http');
 var sqlite3 = require('sqlite3').verbose();
 
-//TODO: Why isnt this working...
 router.post('/', function(req, res, next) {
     var db = new sqlite3.Database("chat.sqlite3");
-
-    //TODO: change query to remove the room with the ID -> var query = "SELECT * FROM rooms";
-    //TODO: I think this is the correct ish ->
-
     var ID = req.param('id');
     console.log('id : ' + ID);
 
@@ -24,7 +19,6 @@ router.post('/', function(req, res, next) {
             } else {
                 console.log("removed Room");
             }
-            //db.close();
         });
         query = "DELETE FROM messages WHERE roomNumber='"+ID+"'";
         db.all(query, (err, result) =>{
@@ -38,8 +32,6 @@ router.post('/', function(req, res, next) {
         });
     });
 
-
-    //Testing to get the response.
 });
 
 module.exports = router;
