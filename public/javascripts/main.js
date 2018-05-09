@@ -68,36 +68,49 @@ mainApp.controller('MainController', function IndexController($scope, $location,
     };
 
     $scope.createRoom = (room_name) => {
-        var err = false;
 
-        for(i = 0; i < $scope.buttons.length; i++){
-            if($scope.buttons[i].name === room_name){
-                err = true;
+        if(room_name === undefined){
+
+            $window.alert("The Room Name Cannot Be Undefined");
+
+        }else{
+            //This trims the roomname.
+            room_name = room_name.replace('(','');
+            room_name = room_name.replace(')','');
+            room_name = room_name.replace('[','');
+            room_name = room_name.replace(']','');
+
+
+            var err = false;
+            for(i = 0; i < $scope.buttons.length; i++){
+                if($scope.buttons[i].name === room_name){
+                    err = true;
+                }
+            }
+            if(err){
+                $window.alert("This Chat Room Already Exists");
+            }
+            else{
+
+                var url = "/createRoom?room_name="+room_name;
+                $http({
+                    method: "POST",
+                    url: url
+                }).then(function successCallback(response) {
+                    //console.log(response);
+                    console.log('Success');
+                    //TODO: Push room_name and the ID from response to the $scope.buttons array then $scope.$apply()
+                    console.log(response);
+                    var newButton = {ID:parseInt(response.data),name:room_name};
+                    $scope.buttons.push(newButton);
+                    $scope.$apply();
+
+                }, function errorCallback(response) {
+                    console.log('Oops');
+                    console.log(response);
+                });
             }
         }
 
-        if(err){
-            $window.alert("This Chat Room Already Exists");
-        }
-        else{
-
-            var url = "/createRoom?room_name="+room_name;
-            $http({
-                method: "POST",
-                url: url
-            }).then(function successCallback(response) {
-                //console.log(response);
-                console.log('Success');
-                //TODO: Push room_name and the ID from response to the $scope.buttons array then $scope.$apply()
-                console.log(response);
-                var newButton = {ID:parseInt(response.data),name:room_name};
-                $scope.buttons.push(newButton);
-                $scope.$apply();
-
-            }, function errorCallback(response) {
-                console.log('Oops');
-                console.log(response);
-            });
-        }
     }
 });
