@@ -27,6 +27,7 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             console.log(response);
         });
     };
+
     $scope.logout = () => {
         window.location.href = "/";
     };
@@ -50,7 +51,6 @@ mainApp.controller('MainController', function IndexController($scope, $location,
                 }
             }
             $scope.buttons = newArray;
-            $scope.$apply();
 
         }, function errorCallback(response) {
             console.log('Oops');
@@ -82,7 +82,7 @@ mainApp.controller('MainController', function IndexController($scope, $location,
                 $window.alert("This Chat Room Already Exists");
             }
             else{
-
+                $('#createChatroomText').val("");
                 var url = "/createRoom?room_name="+room_name;
                 $http({
                     method: "POST",
@@ -90,7 +90,6 @@ mainApp.controller('MainController', function IndexController($scope, $location,
                 }).then(function successCallback(response) {
                     var newButton = {ID:parseInt(response.data),name:room_name};
                     $scope.buttons.push(newButton);
-                    $scope.$apply();
 
                 }, function errorCallback(response) {
                     console.log('Oops');

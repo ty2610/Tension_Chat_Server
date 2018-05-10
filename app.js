@@ -11,6 +11,7 @@ var loginSwitchRouter = require('./routes/loginSwitch');
 var getMessageRouter = require('./routes/getMessage');
 var sendMessageRouter = require('./routes/sendMessage');
 var getUserColor = require('./routes/getUserColor');
+var getChatRoomName = require('./routes/getChatRoomName');
 
 //Added the getChatRooms router
 var getChatRooms = require('./routes/getChatRooms');
@@ -37,6 +38,7 @@ app.use('/loginSwitch', loginSwitchRouter);
 app.use('/getMessages', getMessageRouter);
 app.use('/sendMessage', sendMessageRouter);
 app.use('/getUserColor', getUserColor);
+app.use('/getChatRoomName', getChatRoomName);
 
 //Added the getChatRooms router
 app.use('/getChatRooms',getChatRooms);

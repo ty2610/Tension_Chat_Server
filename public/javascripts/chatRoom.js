@@ -3,6 +3,7 @@ var chatApp = angular.module('chatRoom', []).config(['$locationProvider', functi
 chatApp.controller('chatController', function ($scope, $location) {
     $scope.messageObject;
     $scope.localMessageObject = [];
+    $scope.chatRoomName;
 
     $scope.paramUsername = $location.search().username;
     $scope.paramChatNumber = $location.search().chatNumber;
@@ -20,6 +21,23 @@ chatApp.controller('chatController', function ($scope, $location) {
                 $scope.messageObject = JSON.parse(data);
                 $scope.$apply();
                 $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
+            },
+            error: function (error) {
+                alert(error.responseText);
+            }
+        });
+
+        var url = "getChatRoomName";
+        var send = {chatNumber:$scope.paramChatNumber};
+        $.ajax({
+            url: url,
+            data: send,
+            type: 'POST',
+            cache: false,
+            contentType: "application/x-www-form-urlencoded",
+            success: (data) => {
+                $scope.chatRoomName = JSON.parse(data)[0].name;
+                $scope.$apply();
             },
             error: function (error) {
                 alert(error.responseText);
@@ -83,5 +101,11 @@ chatApp.controller('chatController', function ($scope, $location) {
         $scope.$apply();
         $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
         $("#message").val("");
+    };
+
+    $scope.backToLogin = () => {
+        var switchUrl;
+        switchUrl = "/loginSwitch?username=" + $scope.paramUsername;
+        window.location.href = switchUrl;
     };
 });
