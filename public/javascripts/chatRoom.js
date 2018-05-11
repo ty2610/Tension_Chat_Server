@@ -68,6 +68,7 @@ chatApp.controller('chatController', function ($scope, $location) {
 
     $scope.sendMessage = () =>{
         $scope.sendMessageHelper($("#message").val());
+        $("#message").val("");
     };
 
     $scope.sendMessageHelper = (message) => {
@@ -122,7 +123,6 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.localInsert = (sendMessageObject) => {
         $scope.localMessageObject.push(sendMessageObject);
         $scope.$apply();
-        $("#message").val("");
     };
 
     $scope.backToMain = () => {
