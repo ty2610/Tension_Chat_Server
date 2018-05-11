@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="application/javascript" src="/socket.io/socket.io.js"></script>
     <script src="javascripts/main.js"></script>
     <link rel="stylesheet" href="stylesheets/main.css"/>
 </head>
@@ -32,7 +33,7 @@
         <div style="margin-left: 20px; margin-top: 20px" class="ng-cloak">
             <div>
                 <p style="display: inline; font-size: 1.5em">Create Chat Room: </p>
-                <input id="createChatroomText" type="text" placeholder="Name" ng-model="chatRoomName" style="vertical-align: middle; margin-left: 5px">
+                <input id="createChatroomText" type="text" placeholder="Name" ng-model="chatRoomName" style="vertical-align: middle; margin-left: 5px" ng-keyup="$event.keyCode == 13 ? createRoom(chatRoomName) : null">
                 <input class="btn btn-primary" type="submit" value="Create Room" ng-click="createRoom(chatRoomName)" style="vertical-align: middle; margin-left: 5px">
             </div>
 

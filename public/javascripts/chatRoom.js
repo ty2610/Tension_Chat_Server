@@ -4,6 +4,7 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.messageObject;
     $scope.localMessageObject = [];
     $scope.chatRoomName;
+    $scope.deleterName;
 
     $scope.paramUsername = $location.search().username;
     $scope.paramChatNumber = $location.search().chatNumber;
@@ -51,6 +52,12 @@ chatApp.controller('chatController', function ($scope, $location) {
             if(sendMessageObject.chatRoomNumber === $scope.paramChatNumber && sendMessageObject.username !== $scope.paramUsername) {
                 $scope.localInsert(sendMessageObject);
                 $scope.convertToEmoji();
+            }
+        });
+        $scope.socket.on('Delete Room', (sendMessageObject) => {
+            if(sendMessageObject.chatRoomNumber == $scope.paramChatNumber) {
+                $scope.deleterName = sendMessageObject.username;
+                $scope.leaveRoom();
             }
         });
     };
@@ -133,4 +140,9 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.logout = () => {
         window.location.href = "/";
     };
+
+    $scope.leaveRoom = () => {
+        $scope.$apply();
+        $('#mustLeave').modal({backdrop: 'static', keyboard: false})
+    }
 });
