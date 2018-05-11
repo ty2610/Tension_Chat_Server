@@ -28,6 +28,18 @@ mainApp.controller('MainController', function IndexController($scope, $location,
                 $scope.socketInsert(sendChatRoomObject);
             }
         });
+
+        $scope.socket.on('Delete Room', (sendMessageObject) => {
+            $scope.deleterName = sendMessageObject.username;
+            var newArray = [];
+            for(i=0; i < $scope.buttons.length; i++){
+                if($scope.buttons[i].ID !== sendMessageObject.chatRoomNumber){
+                    newArray.push($scope.buttons[i]);
+                }
+            }
+            $scope.buttons = newArray;
+            $scope.$apply();
+        });
     };
 
     $scope.logout = () => {
