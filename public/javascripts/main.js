@@ -19,6 +19,15 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             console.log('Oops');
             console.log(response);
         });
+
+        $scope.socket = io();
+
+        $scope.socket.on('Chat Room', (sendChatRoomObject) => {
+            if(sendChatRoomObject.username !== $scope.paramUsername) {
+                //$scope.localInsert(sendMessageObject);
+                $scope.socketInsert(sendChatRoomObject);
+            }
+        });
     };
 
     $scope.logout = () => {
@@ -40,7 +49,7 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             method: "POST",
             url: url
         }).then(function successCallback(response) {
-
+            $scope.socket.emit('Delete Room', {chatRoomNumber:parseInt(response.data),username:$scope.paramUsername});
             var newArray = [];
             for(i=0; i < $scope.buttons.length; i++){
                 if($scope.buttons[i].ID !== parseInt(response.data)){
@@ -85,16 +94,23 @@ mainApp.controller('MainController', function IndexController($scope, $location,
                     method: "POST",
                     url: url
                 }).then(function successCallback(response) {
+                    $scope.socket.emit('Chat Room', {ID:parseInt(response.data),name:room_name,username:$scope.paramUsername});
                     var newButton = {ID:parseInt(response.data),name:room_name};
                     $scope.buttons.push(newButton);
 
                 }, function errorCallback(response) {
-                    console.log('Oops');
-                    console.log(response);
+                    //console.log('Oops');
+                    //console.log(response);
+                    $window.alert(response.data);
                 });
             }
         }
+    };
 
+    $scope.socketInsert = (sendChatRoomObject) => {
+        var newButton = {ID:sendChatRoomObject.ID,name:sendChatRoomObject.name};
+        $scope.buttons.push(newButton);
+        $scope.$apply();
     };
 
     $scope.goToAbout = () => {

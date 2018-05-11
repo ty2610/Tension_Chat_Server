@@ -53,6 +53,12 @@ io.sockets.on('connection', (client) => {
     client.on('Chat Message', function (messageObject) {
         io.sockets.emit('Chat Message', messageObject);
     });
+    client.on('Chat Room', function (messageObject) {
+        io.sockets.emit('Chat Room', messageObject);
+    });
+    client.on('Delete Room', function (messageObject) {
+        io.sockets.emit('Delete Room', messageObject);
+    });
 });
 
 /**

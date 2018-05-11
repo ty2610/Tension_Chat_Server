@@ -11,16 +11,37 @@ router.post('/create', function(req, res, next) {
     username = username.replace(/[\[\]();]/g, "");
     userColor = userColor.replace(/[\[\]();]/g, "");
 
-    var query = "INSERT OR REPLACE INTO user(username,color) VALUES('" + username + "','" + userColor + "');";
+    var query
+    //var query = "INSERT OR REPLACE INTO user(username,color) VALUES('" + username + "','" + userColor + "');";
+    var query = "SELECT * FROM user WHERE username = '" + username + "';";
 
-    db.run(query, (err) =>{
+    db.all(query, (err, result) =>{
         if(err !== null){
             res.status(500).send(err);
+        } else if(result.length===0) {
+            query = "INSERT OR REPLACE INTO user(username,color) VALUES('" + username + "','" + userColor + "');";
+            db.run(query, (err) =>{
+                if(err !== null){
+                    res.status(500).send(err);
+                } else {
+                    res.sendStatus(200);
+                }
+                db.close();
+            });
         } else {
-            res.sendStatus(200);
+            query = "UPDATE user SET color= '" + userColor + "' WHERE username= '" + username + "';";
+            db.run(query, (err) =>{
+                if(err !== null){
+                    res.status(500).send(err);
+                } else {
+                    res.sendStatus(200);
+                }
+                db.close();
+            });
         }
-        db.close();
     });
+
+
 });
 
 router.post('/enter', function(req, res, next) {

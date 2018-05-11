@@ -17,7 +17,7 @@
     <div ng-controller="IndexController">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand">Tension</a>
+            <a class="navbar-brand" style="color: white;">Tension</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,11 +33,11 @@
             <div class="row justify-content-center" style="margin-top: 20px;">
                 <div class="col-sm">
                     <label for="username">Username:</label>
-                    <input class="form-control" type="text" name="username" id="username">
+                    <input class="form-control" type="text" name="username" id="username" ng-keyup="$event.keyCode == 13 ? submitNewLogin() : null">
                 </div>
                 <div class="col-sm">
                     <label for="colorSelect">User Color:</label>
-                    <input type="color" class="form-control" id="colorSelect">
+                    <input type="color" class="form-control" id="colorSelect" ng-keyup="$event.keyCode == 13 ? submitNewLogin() : null">
                 </div>
                 <div class="col-sm">
                     <input class="btn btn-primary" type="submit" value="Create" ng-click="submitNewLogin()" style="margin-top: 30px;">
@@ -53,7 +53,7 @@
             <div class="row justify-content-center" style="margin-top: 20px;">
                 <div class="col-sm-4">
                     <label for="username">Username:</label>
-                    <input class="form-control" type="text" name="knownUsername" id="knownUsername">
+                    <input class="form-control" type="text" name="knownUsername" id="knownUsername" ng-keyup="$event.keyCode == 13 ? submitLogin() : null">
                 </div>
                 <div class="col-sm-4">
                     <input class="btn btn-primary" type="submit" value="Login" ng-click="submitLogin()" style="margin-top: 30px;">

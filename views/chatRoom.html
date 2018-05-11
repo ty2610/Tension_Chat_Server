@@ -21,7 +21,7 @@
 <body ng-controller="chatController" ng-init="initialize()">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">Tension</a>
+        <a class="navbar-brand" style="color: white;">Tension</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,6 +29,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a href ng-click="backToMain()" class="nav-link">Home </a></li>
                 <li class="nav-item"><a href class="nav-link" ng-click="goToAbout()" target="_self">About The Project </a></li>
+                <li class="nav-item"><a href class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">Emoticons </a></li>
             </ul>
             <button class="btn btn-outline-info my-2 my-sm-0" type="submit" ng-click="logout()">logout</button>
         </div>
@@ -62,5 +63,45 @@
 
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Possible Emoticons</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    :-) :) :o) :c) :^) :-D :-( :-9 ;-) :-P :-p :-Þ :-b :-O :-/ :-X :-# :'( B-) 8-) :-\ ;*( :-* :] :> =] =) 8) :} :D 8D XD xD =D :( :< :[ :{ =( ;) ;] ;D :P :p =P =p :b :Þ :O 8O :/ =/ :S :# :X B) O:)
+                    <div class="message">:-) :) :o) :c) :^) :-D :-( :-9 ;-) :-P :-p :-Þ :-b :-O :-/ :-X :-# :'( B-) 8-) :-\ ;*( :-* :] :> =] =) 8) :} :D 8D XD xD =D :( :< :[ :{ =( ;) ;] ;D :P :p =P =p :b :Þ :O 8O :/ =/ :S :# :X B) O:)</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="mustLeave" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mustLeaveTitle">Chatroom Deleted</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{chatRoomName}} has been deleted by: {{deleterName}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="backToMain()">Leave</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
