@@ -21,6 +21,7 @@ chatApp.controller('chatController', function ($scope, $location) {
                 $scope.messageObject = JSON.parse(data);
                 $scope.$apply();
                 $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
+                $scope.convertToEmoji();
             },
             error: function (error) {
                 alert(error.responseText);
@@ -49,6 +50,7 @@ chatApp.controller('chatController', function ($scope, $location) {
         $scope.socket.on('Chat Message', (sendMessageObject) => {
             if(sendMessageObject.chatRoomNumber === $scope.paramChatNumber && sendMessageObject.username !== $scope.paramUsername) {
                 $scope.localInsert(sendMessageObject);
+                $scope.convertToEmoji();
             }
         });
     };
@@ -84,6 +86,7 @@ chatApp.controller('chatController', function ($scope, $location) {
                             $scope.socket.emit('Chat Message', sendMessageObject);
                             //$scope.localInsert(ret[0].color, inputMessage, $scope.paramChatNumber, $scope.paramUsername);
                             $scope.localInsert(sendMessageObject);
+                            $scope.convertToEmoji();
                         },
                         error: function (error) {
                             alert(error.responseText);
@@ -95,6 +98,10 @@ chatApp.controller('chatController', function ($scope, $location) {
                 }
             });
         }
+    };
+
+    $scope.convertToEmoji = () => {
+        $('.message').emoticonize();
     };
 
     $scope.localInsert = (sendMessageObject) => {

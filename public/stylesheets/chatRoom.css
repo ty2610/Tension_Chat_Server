@@ -47,3 +47,7 @@
     outline: 0;
     box-shadow: none;
 }
+span {
+    word-wrap: normal;
+    box-sizing : content-box;
+}
