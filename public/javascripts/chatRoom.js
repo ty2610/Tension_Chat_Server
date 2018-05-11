@@ -8,7 +8,7 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.paramUsername = $location.search().username;
     $scope.paramChatNumber = $location.search().chatNumber;
     $scope.initialize = () => {
-
+        $scope.initDragNDrop();
         var url = "getMessages";
         var send = {chatRoomNumber:$scope.paramChatNumber};
         $.ajax({
@@ -55,8 +55,13 @@ chatApp.controller('chatController', function ($scope, $location) {
         });
     };
 
-    $scope.sendMessage = () => {
-        var inputMessage = $("#message").val();
+
+    $scope.sendMessage = () =>{
+        $scope.sendMessageHelper($("#message").val());
+    }
+
+    $scope.sendMessageHelper = (message) => {
+        var inputMessage = message;
         inputMessage = $scope.findLinks(inputMessage);
         if(inputMessage !== "" && inputMessage !== undefined) {
             var url = "sendMessage";
@@ -106,6 +111,10 @@ chatApp.controller('chatController', function ($scope, $location) {
 
     $scope.localInsert = (sendMessageObject) => {
         $scope.localMessageObject.push(sendMessageObject);
+        var imgHeader = "<----- BEGIN IMAGE ALIAS----->";
+        if(sendMessageObject.message.includes(imgHeader)){
+            //$scope.getImage(sendMessageObject.message.substr(imgHeader.length));
+        }
         $scope.$apply();
         $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
         $("#message").val("");
@@ -133,4 +142,82 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.logout = () => {
         window.location.href = "/";
     };
+
+    $scope.initDragNDrop = () => {
+        $scope.dropArea = $('.messageArea');
+        $scope.dropArea.on('dragenter dragover', function(e) {
+            $scope.dropArea.addClass('hovered');
+            $('#chatHolder').addClass('stopScroll');
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        $scope.dropArea.on('dragleave drop', function(e) {
+            //console.log(e);
+            $scope.dropArea.removeClass('hovered');
+            $('#chatHolder').removeClass('stopScroll');
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        $scope.dropArea.on('drop', (e)=>{
+            e.preventDefault();
+            e.dataTransfer = e.originalEvent.dataTransfer;
+            if(e.dataTransfer.items){
+                // Use DataTransferItemList interface to access the file(s)
+                if(e.dataTransfer.items.length == 0){
+                    alert("Oops! Not a valid file.");
+                }else if(e.dataTransfer.items.length > 1){
+                    alert("Oops! Please upload one image at a time.");
+                }else{
+                    var file = e.dataTransfer.items[0].getAsFile();
+                    if(["image/png", "image/jpeg", "image/jpg", "image/gif"].indexOf(file.type) > -1 ){
+                        console.log(file);
+                        $scope.handleFile(file);
+                    }else{
+                        alert("Oops! Invalid file type. Please use .png, .jpg, .jpeg, or .gif only.");
+                    }
+                }
+            }
+        });
+
+    }
+    $scope.handleFile = (file) => {
+        var imgId = Math.random().toString(36).substr(7);
+        console.log(file,imgId);
+        var formData = new FormData();
+        formData.append('file',file);
+        formData.append('id',imgId);
+
+        $.ajax({
+            url: "/sendImage",
+            data: formData,
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            success: (data) => {
+                var msg = '<img class="chatImg" src="/uploads/'+data+'"/>';
+                console.log(msg);
+                $scope.sendMessageHelper(msg);
+            },
+            error: function (error) {
+                console.log(error.responseText);
+                console.log("ajax error");
+            }
+        });
+    }
+
+    $scope.getImage = (alias) => {
+        $.ajax({
+            url: "/getImage",
+            data: {alias: alias},
+            type: 'POST',
+            cache: false,
+            contentType: "application/x-www-form-urlencoded",
+            success: (data) => {
+                console.log(data);
+            },
+            error: function (error) {
+                console.log("Error:",error);
+            }
+        });
+    }
 });
