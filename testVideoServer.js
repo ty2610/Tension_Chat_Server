@@ -1,4 +1,3 @@
-'use strict';
 
 var os = require('os');
 var nodeStatic = require('node-static');
@@ -8,7 +7,7 @@ var fs = require('fs');
 
 var fileServer = new nodeStatic.Server('./views/videoRoom');
 
-	
+
 const serverConfig = {
 	key: fs.readFileSync('./certs/key.pem'),
 	cert: fs.readFileSync('./certs/cert.pem'),
