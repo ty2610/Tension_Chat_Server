@@ -6,6 +6,10 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.chatRoomName;
     $scope.deleterName;
 
+    new ResizeSensor(jQuery('#TRY'), function() {
+        $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
+    });
+
     $scope.paramUsername = $location.search().username;
     $scope.paramChatNumber = $location.search().chatNumber;
     $scope.initialize = () => {
@@ -21,7 +25,6 @@ chatApp.controller('chatController', function ($scope, $location) {
             success: (data) => {
                 $scope.messageObject = JSON.parse(data);
                 $scope.$apply();
-                $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
                 $scope.convertToEmoji();
             },
             error: function (error) {
@@ -119,7 +122,6 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.localInsert = (sendMessageObject) => {
         $scope.localMessageObject.push(sendMessageObject);
         $scope.$apply();
-        $('#chatHolder').scrollTop($('#chatHolder')[0].scrollHeight);
         $("#message").val("");
     };
 
@@ -149,7 +151,7 @@ chatApp.controller('chatController', function ($scope, $location) {
     $scope.leaveRoom = () => {
         $scope.$apply();
         $('#mustLeave').modal({backdrop: 'static', keyboard: false})
-    }
+    };
 
     $scope.initDragNDrop = () => {
         $scope.dropArea = $('.messageArea');
@@ -187,7 +189,7 @@ chatApp.controller('chatController', function ($scope, $location) {
             }
         });
 
-    }
+    };
     $scope.handleFile = (file) => {
         var formData = new FormData();
         formData.append('file',file);
@@ -209,5 +211,5 @@ chatApp.controller('chatController', function ($scope, $location) {
                 console.log("ajax error");
             }
         });
-    }
+    };
 });

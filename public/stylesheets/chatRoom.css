@@ -63,3 +63,7 @@
 .messageArea.hovered{
     border-color: #000;
 }
+span {
+    word-wrap: normal;
+    box-sizing : content-box;
+}
