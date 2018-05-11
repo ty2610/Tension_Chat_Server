@@ -29,7 +29,7 @@
     margin-top: 5px;
 }
 .roomTitle {
-    padding: 20px 0px;
+    padding: 15px 0px;
     text-decoration-line: underline;
 }
 .chatContainer {
@@ -47,7 +47,19 @@
     outline: 0;
     box-shadow: none;
 }
-span {
-    word-wrap: normal;
-    box-sizing : content-box;
+#upload-btn{
+    background-color: #33af45;
+    color: white;
+    cursor: pointer;
+}
+#upload-btn:hover{
+    border: 1px solid black;
+}
+.messageArea {
+    padding: 5px;
+    border: 3px #fff dashed;
+    border-radius: 10px;
+}
+.messageArea.hovered{
+    border-color: #000;
 }

@@ -178,7 +178,7 @@ chatApp.controller('chatController', function ($scope, $location) {
                 }else{
                     var file = e.dataTransfer.items[0].getAsFile();
                     if(["image/png", "image/jpeg", "image/jpg", "image/gif"].indexOf(file.type) > -1 ){
-                        console.log(file);
+                        // console.log(file);
                         $scope.handleFile(file);
                     }else{
                         alert("Oops! Invalid file type. Please use .png, .jpg, .jpeg, or .gif only.");
@@ -189,11 +189,8 @@ chatApp.controller('chatController', function ($scope, $location) {
 
     }
     $scope.handleFile = (file) => {
-        var imgId = Math.random().toString(36).substr(7);
-        console.log(file,imgId);
         var formData = new FormData();
         formData.append('file',file);
-        formData.append('id',imgId);
 
         $.ajax({
             url: "/sendImage",
@@ -205,26 +202,11 @@ chatApp.controller('chatController', function ($scope, $location) {
                 var msg = '<img class="chatImg" src="/uploads/'+data+'"/>';
                 console.log(msg);
                 $scope.sendMessageHelper(msg);
+                //$scope.sendMessageHelper("test");
             },
             error: function (error) {
                 console.log(error.responseText);
                 console.log("ajax error");
-            }
-        });
-    }
-
-    $scope.getImage = (alias) => {
-        $.ajax({
-            url: "/getImage",
-            data: {alias: alias},
-            type: 'POST',
-            cache: false,
-            contentType: "application/x-www-form-urlencoded",
-            success: (data) => {
-                console.log(data);
-            },
-            error: function (error) {
-                console.log("Error:",error);
             }
         });
     }
