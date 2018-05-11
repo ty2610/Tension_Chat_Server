@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="wikiApp">
+<html lang="en" ng-app="aboutApp">
 <head>
     <meta charset="UTF-8">
     <title>About</title>
@@ -11,21 +11,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+    <script src="javascripts/about.js"></script>
     <link rel="stylesheet" href="stylesheets/about.css"/>
 </head>
-<body>
+<body ng-controller="AboutController" ng-init="initialize()">
 <div>
     <!-- START NAV -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href>Wiki</a>
+        <a class="navbar-brand">Tension</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="/" target="_self">Home </a></li>
-                <li class="nav-item"><a class="nav-link" href>About The Project </a></li>
+                <li class="nav-item"><a href ng-click="backToMain()" class="nav-link">Home </a></li>
+                <li class="nav-item active"><a class="nav-link" target="_self">About The Project </a></li>
             </ul>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit" ng-click="logout()">logout</button>
         </div>
     </nav>
     <!-- END NAV -->
@@ -70,10 +72,11 @@
                 <img src="images/ns_pic.jpg" alt="NickScheelImage" class="aboutImg"/>
                 <h2>Nick Scheel</h2>
                 <p>
-                    I'm a senior computer science major at the University of St. Thomas looking to begin my career in software development. In addition to my studies I serve as the President of the Computer Science Club, and I'm also an avid tabletop board game enthusiast!            </p>
+                    I'm a senior computer science major at the University of St. Thomas looking to begin my career in software development. In addition to my studies I serve as the President of the Computer Science Club, and I'm also an avid tabletop board game enthusiast!
+                </p>
             </div>
             <div class="col-md-3">
-                <img src="images/tg_pic.jpeg" alt="ZachSorensonImage" class="aboutImg"/>
+                <img src="images/tg_pic.jpeg" alt="Tyler Green" class="aboutImg"/>
                 <h3>Tyler Green</h3>
                 <p>
                     I'm a full-stack software engineer senior attending The University of St. Thomas. When I'm not learning iOS or
@@ -82,10 +85,11 @@
                 </p>
             </div>
             <div class="col-md-3">
-                <img src="images/ns_pic.jpg" alt="NickScheelImage" class="aboutImg"/>
+                <img src="images/jj_pic.png" alt="Josh Johnson" class="aboutImg"/>
                 <h2>Josh Johnson</h2>
                 <p>
-                    I'm a senior computer science major at the University of St. Thomas looking to begin my career in software development. In addition to my studies I serve as the President of the Computer Science Club, and I'm also an avid tabletop board game enthusiast!            </p>
+                    I am a Senior at St. Thomas and can't wait to graduate. I grew up in St. Anthony, MN and was born in Minneapolis. I enjoy the outdoors as well as playing video games. I also enjoy to challenge myself and put forth the best effort I can.
+                </p>
             </div>
             <div class="col-md-3">
                 <img src="images/tg_pic.jpeg" alt="ZachSorensonImage" class="aboutImg"/>

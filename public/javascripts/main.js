@@ -3,7 +3,7 @@ var mainApp = angular.module('mainApp', []).config(['$locationProvider', functio
 mainApp.controller('MainController', function IndexController($scope, $location, $http, $window) {
 
     $scope.initialize = () => {
-        var paramUsername = $location.search().username;
+        $scope.paramUsername = $location.search().username;
         $scope.buttons=[];
 
         var url = '/getChatRooms';
@@ -26,7 +26,7 @@ mainApp.controller('MainController', function IndexController($scope, $location,
     };
 
     $scope.openChatRoom = (number) => {
-        window.location.href = "/chat?username=" + $location.search().username + "&chatNumber=" + number;
+        window.location.href = "/chat?username=" + $scope.paramUsername + "&chatNumber=" + number;
     };
 
     $scope.openVideoRoom = () => {
@@ -95,5 +95,11 @@ mainApp.controller('MainController', function IndexController($scope, $location,
             }
         }
 
-    }
+    };
+
+    $scope.goToAbout = () => {
+        var switchUrl;
+        switchUrl = "/aboutPage?username=" + $scope.paramUsername;
+        window.location.href = switchUrl;
+    };
 });

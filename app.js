@@ -13,6 +13,7 @@ var sendMessageRouter = require('./routes/sendMessage');
 var getUserColor = require('./routes/getUserColor');
 var getChatRoomName = require('./routes/getChatRoomName');
 var videoRoom = require('./routes/videoRoom');
+var aboutPage = require('./routes/aboutPage');
 
 //Added the getChatRooms router
 var getChatRooms = require('./routes/getChatRooms');
@@ -41,6 +42,7 @@ app.use('/sendMessage', sendMessageRouter);
 app.use('/getUserColor', getUserColor);
 app.use('/getChatRoomName', getChatRoomName);
 app.use('/videoRoom', videoRoom);
+app.use('/aboutPage', aboutPage);
 
 //Added the getChatRooms router
 app.use('/getChatRooms',getChatRooms);

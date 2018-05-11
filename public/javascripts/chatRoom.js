@@ -104,7 +104,7 @@ chatApp.controller('chatController', function ($scope, $location) {
         $("#message").val("");
     };
 
-    $scope.backToLogin = () => {
+    $scope.backToMain = () => {
         var switchUrl;
         switchUrl = "/loginSwitch?username=" + $scope.paramUsername;
         window.location.href = switchUrl;
@@ -115,5 +115,15 @@ chatApp.controller('chatController', function ($scope, $location) {
         return text.replace(urlRegex, function(url){
            return '<a href="//' + url + '" target="_blank">' + url + '</a>';
         });
-    }
+    };
+
+    $scope.goToAbout = () => {
+        var switchUrl;
+        switchUrl = "/aboutPage?username=" + $scope.paramUsername;
+        window.location.href = switchUrl;
+    };
+
+    $scope.logout = () => {
+        window.location.href = "/";
+    };
 });
