@@ -29,6 +29,10 @@ mainApp.controller('MainController', function IndexController($scope, $location,
         window.location.href = "/chat?username=" + $location.search().username + "&chatNumber=" + number;
     };
 
+    $scope.openVideoRoom = () => {
+      window.location.href = "/videoRoom";
+    };
+
     $scope.removeRoom = (ID) =>{
 
         var url = "/removeRoom?id="+ID;

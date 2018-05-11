@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="wikiApp">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+    <link rel="stylesheet" href="stylesheets/about.css"/>
+</head>
+<body>
+<div>
+    <!-- START NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href>Wiki</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/" target="_self">Home </a></li>
+                <li class="nav-item"><a class="nav-link" href>About The Project </a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- END NAV -->
+    <div class="container about">
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <h1>About the Project</h1>
+                <p>
+                    This project is a competitor to <a target="_blank" href="https://slack.com">Slack</a>. It aims to mimic the chat room experience.
+                </p>
+                <h3>SQLite3 - IMDB DB</h3>
+                <p>
+                    <a target="_blank" href="https://www.npmjs.com/package/sqlite3">SQLite3</a> is a tool that can be used alongside Node.js to query a database with SQL. This allowed us to pull dynamic data for users and chatrooms.
+                </p>
+                <h3>Node.js - Express.js</h3>
+                <p>
+                    <a target="_blank" href="https://nodejs.org/en/">Node.js</a> is an open-source, cross-platform JavaScript run-time environment that executes JavaScript code server-side. This was used to execute commands with SQLite3 and serve files to the browser. <a target="_blank" href="https://www.npmjs.com/package/express">Express.js</a> is a web application framework for Node.js that allows for better management of requests made to the Node.js server.
+                </p>
+                <h3>Bootstrap4 - Angular.js - jQuery</h3>
+                <p>
+                    This site was created using both <a target="_blank" href="https://getbootstrap.com/">Bootstrap 4</a> and <a target="_blank" href="https://angularjs.org/">AngularJS</a>. Bootstrap was used to format the page correctly using their grid system to section the page and provide some default CSS styling. Angular was used for sending requests to the Node.js server for dynamic data to populate and edit the pages. We also used <a target="_blank" href="https://jquery.com/">jQuery</a> for manipulation of the DOM.
+                </p>
+                <h3>Socket.io</h3>
+                <p>
+                    We used <a target="_blank" href="https://socket.io">Socket.io</a> to send messages from the server to users in chatrooms.
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-md-center text-center">
+            <div class="col-md ">
+                <h1>Demo Video</h1>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Q00Ivp7n0HI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="row justify-content-md-center text-center">
+            <div class="col-md">
+                <h1>About the Team</h1>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-3">
+                <img src="images/ns_pic.jpg" alt="NickScheelImage" class="aboutImg"/>
+                <h2>Nick Scheel</h2>
+                <p>
+                    I'm a senior computer science major at the University of St. Thomas looking to begin my career in software development. In addition to my studies I serve as the President of the Computer Science Club, and I'm also an avid tabletop board game enthusiast!            </p>
+            </div>
+            <div class="col-md-3">
+                <img src="images/tg_pic.jpeg" alt="ZachSorensonImage" class="aboutImg"/>
+                <h3>Tyler Green</h3>
+                <p>
+                    I'm a full-stack software engineer senior attending The University of St. Thomas. When I'm not learning iOS or
+                    servlet functionalities, I go airsofting, snowboarding, or play video games. I have a passion for
+                    watching and participating in soccer and fitness.
+                </p>
+            </div>
+            <div class="col-md-3">
+                <img src="images/ns_pic.jpg" alt="NickScheelImage" class="aboutImg"/>
+                <h2>Josh Johnson</h2>
+                <p>
+                    I'm a senior computer science major at the University of St. Thomas looking to begin my career in software development. In addition to my studies I serve as the President of the Computer Science Club, and I'm also an avid tabletop board game enthusiast!            </p>
+            </div>
+            <div class="col-md-3">
+                <img src="images/tg_pic.jpeg" alt="ZachSorensonImage" class="aboutImg"/>
+                <h3>Ben Taufen</h3>
+                <p>
+                    I'm a full-stack software engineer senior attending The University of St. Thomas. When I'm not learning iOS or
+                    servlet functionalities, I go airsofting, snowboarding, or play video games. I have a passion for
+                    watching and participating in soccer and fitness.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
