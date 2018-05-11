@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
     <script type="application/javascript" src="/socket.io/socket.io.js"></script>
     <script src="javascripts/chatRoom.js"></script>
 </head>
@@ -39,7 +40,7 @@
                 <div class="stuffHolder">
                     <div class="userName">{{row.username}}</div>
                     <div class="timeStamp">{{row.timestamp}}</div>
-                    <div class="message">{{row.message}}</div>
+                    <div class="message" ng-bind-html="row.message"></div>
                 </div>
             </div>
             <div class="p-2" ng-repeat="row in localMessageObject track by $index">
@@ -47,7 +48,7 @@
                 <div class="stuffHolder">
                     <div class="userName">{{row.username}}</div>
                     <div class="timeStamp">{{row.timestamp}}</div>
-                    <div class="message">{{row.message}}</div>
+                    <div class="message" ng-bind-html="row.message"></div>
                 </div>
             </div>
         </div>

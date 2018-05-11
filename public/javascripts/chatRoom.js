@@ -1,4 +1,4 @@
-var chatApp = angular.module('chatRoom', []).config(['$locationProvider', function($locationProvider) { $locationProvider.html5Mode({ enabled: true, requireBase: false }); }]);
+var chatApp = angular.module('chatRoom', ['ngSanitize']).config(['$locationProvider', function($locationProvider) { $locationProvider.html5Mode({ enabled: true, requireBase: false }); }]);
 
 chatApp.controller('chatController', function ($scope, $location) {
     $scope.messageObject;
@@ -55,6 +55,7 @@ chatApp.controller('chatController', function ($scope, $location) {
 
     $scope.sendMessage = () => {
         var inputMessage = $("#message").val();
+        inputMessage = $scope.findLinks(inputMessage);
         if(inputMessage !== "" && inputMessage !== undefined) {
             var url = "sendMessage";
             var send = {chatRoomNumber:$scope.paramChatNumber, username:$scope.paramUsername, message:inputMessage};
@@ -108,4 +109,11 @@ chatApp.controller('chatController', function ($scope, $location) {
         switchUrl = "/loginSwitch?username=" + $scope.paramUsername;
         window.location.href = switchUrl;
     };
+
+    $scope.findLinks = (text) =>{
+        var urlRegex = /(([a-z]+:\/\/)?(([a-z0-9\-]+\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel|local|internal))(:[0-9]{1,5})?(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-zA-Z0-9!$&'()*+.=-_~:@/?]*)?)(\s+|$)/gi
+        return text.replace(urlRegex, function(url){
+           return '<a href="//' + url + '" target="_blank">' + url + '</a>';
+        });
+    }
 });
