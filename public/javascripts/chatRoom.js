@@ -68,7 +68,7 @@ chatApp.controller('chatController', function ($scope, $location) {
 
     $scope.sendMessage = () =>{
         $scope.sendMessageHelper($("#message").val());
-    }
+    };
 
     $scope.sendMessageHelper = (message) => {
         var inputMessage = message;
